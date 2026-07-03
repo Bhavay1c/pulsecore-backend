@@ -17,10 +17,10 @@ event-driven, enterprise backend systems.
 
 ## Running locally
 
-Requires Java 17+ and Maven (or use the bundled `./mvnw` wrapper if you add one).
+Requires Java 17+. Use the bundled Maven wrapper — no local Maven install needed:
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 The API starts on `http://localhost:8080`. Demo data (4 attendees, 2 VIP) loads
@@ -29,7 +29,7 @@ automatically on startup.
 Run tests:
 
 ```bash
-mvn test
+./mvnw test
 ```
 
 H2 console (inspect the in-memory DB while the app runs):
