@@ -19,6 +19,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
+    @ExceptionHandler(SessionNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleSessionNotFound(SessionNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
     @ExceptionHandler(DuplicateRegistrationException.class)
     public ResponseEntity<Map<String, Object>> handleDuplicate(DuplicateRegistrationException ex) {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage());

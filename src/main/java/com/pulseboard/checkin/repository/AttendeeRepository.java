@@ -10,10 +10,6 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
 
     Optional<Attendee> findByEmailIgnoreCase(String email);
 
-    // Used for check-in-by-name: case-insensitive match, since front-desk staff
-    // won't type names with perfectly consistent casing.
-    Optional<Attendee> findByFullNameIgnoreCase(String fullName);
-
     List<Attendee> findByVipTrue();
 
     List<Attendee> findByCheckedInTrue();
@@ -23,6 +19,10 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
     long countByVipTrue();
 
     long countByVipTrueAndCheckedInTrue();
+
+    // Backs both the per-session capacity check at check-in time and the
+    // session capacity bars on the dashboard.
+    long countBySessionIdAndCheckedInTrue(Long sessionId);
 
     // Most recent check-ins first, for a live activity feed on the dashboard.
     List<Attendee> findTop10ByCheckedInTrueOrderByCheckInTimeDesc();

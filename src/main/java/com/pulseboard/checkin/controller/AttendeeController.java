@@ -24,15 +24,31 @@ public class AttendeeController {
         return attendeeService.register(request);
     }
 
-    @PostMapping("/checkin")
-    public AttendeeResponse checkIn(@Valid @RequestBody CheckInRequest request) {
-        return attendeeService.checkIn(request);
+    @PostMapping("/attendees/walk-in")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AttendeeResponse walkIn(@Valid @RequestBody WalkInRequest request) {
+        return attendeeService.walkIn(request);
+    }
+
+    @PostMapping("/attendees/{id}/checkin")
+    public AttendeeResponse checkIn(@PathVariable Long id) {
+        return attendeeService.checkIn(id);
+    }
+
+    @PostMapping("/attendees/{id}/undo-checkin")
+    public AttendeeResponse undoCheckIn(@PathVariable Long id) {
+        return attendeeService.undoCheckIn(id);
     }
 
     @GetMapping("/attendees")
     public List<AttendeeResponse> getAttendees(
             @RequestParam(name = "vip", required = false) Boolean vip) {
         return attendeeService.getAllAttendees(vip);
+    }
+
+    @GetMapping("/sessions")
+    public List<SessionResponse> getSessions() {
+        return attendeeService.getAllSessions();
     }
 
     @GetMapping("/dashboard")

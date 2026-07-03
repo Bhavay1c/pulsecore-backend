@@ -13,6 +13,9 @@ public class AttendeeResponse {
     private Long id;
     private String fullName;
     private String email;
+    private String ticketId;
+    private Long sessionId;
+    private String sessionName;
     private boolean vip;
     private boolean checkedIn;
     private LocalDateTime checkInTime;
@@ -23,6 +26,9 @@ public class AttendeeResponse {
                 attendee.getId(),
                 attendee.getFullName(),
                 attendee.getEmail(),
+                attendee.getTicketId(),
+                attendee.getSession().getId(),
+                attendee.getSession().getName(),
                 attendee.isVip(),
                 attendee.isCheckedIn(),
                 attendee.getCheckInTime(),

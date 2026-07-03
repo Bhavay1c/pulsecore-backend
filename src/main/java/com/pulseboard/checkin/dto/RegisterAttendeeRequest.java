@@ -2,6 +2,7 @@ package com.pulseboard.checkin.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,9 @@ public class RegisterAttendeeRequest {
     @NotBlank(message = "email is required")
     @Email(message = "email must be a valid email address")
     private String email;
+
+    @NotNull(message = "sessionId is required")
+    private Long sessionId;
 
     private boolean vip;
 }

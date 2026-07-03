@@ -16,5 +16,6 @@ public class DashboardResponse {
     private long vipCount;
     private long vipCheckedInCount;
     private List<AttendeeResponse> recentCheckIns;
+    private List<SessionResponse> sessions;
     private boolean capacityReached;
 }
