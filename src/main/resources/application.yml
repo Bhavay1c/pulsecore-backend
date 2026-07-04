@@ -19,9 +19,18 @@ spring:
         format_sql: true
 
 server:
-  port: 8080
+  # Render/Railway/Heroku-style platforms assign a port at runtime via the
+  # PORT env var; ${PORT:8080} falls back to 8080 for local/Docker runs
+  # where PORT isn't set.
+  port: ${PORT:8080}
 
 # Max attendees the check-in desk will admit. Override with
 # an environment variable (EVENT_CAPACITY) or a different profile per event.
 event:
   capacity: 200
+
+app:
+  cors:
+    # Comma-separated list, overridable via APP_CORS_ALLOWED_ORIGINS so the
+    # deployed frontend's real URL can be added without a code change.
+    allowed-origins: http://localhost:5173,http://localhost:3000
