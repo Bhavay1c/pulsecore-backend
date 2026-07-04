@@ -29,6 +29,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
     }
 
+    @ExceptionHandler(DuplicateSessionException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicateSession(DuplicateSessionException ex) {
+        return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
     @ExceptionHandler(CapacityExceededException.class)
     public ResponseEntity<Map<String, Object>> handleCapacity(CapacityExceededException ex) {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage());

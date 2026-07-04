@@ -4,6 +4,7 @@ import com.pulseboard.checkin.dto.*;
 import com.pulseboard.checkin.exception.AttendeeNotFoundException;
 import com.pulseboard.checkin.exception.CapacityExceededException;
 import com.pulseboard.checkin.exception.DuplicateRegistrationException;
+import com.pulseboard.checkin.exception.DuplicateSessionException;
 import com.pulseboard.checkin.exception.SessionNotFoundException;
 import com.pulseboard.checkin.model.Attendee;
 import com.pulseboard.checkin.model.Session;
@@ -113,6 +114,20 @@ public class AttendeeService {
         return sessionRepository.findAll().stream()
                 .map(session -> SessionResponse.of(session, attendeeRepository.countBySessionIdAndCheckedInTrue(session.getId())))
                 .toList();
+    }
+
+    @Transactional
+    public SessionResponse createSession(CreateSessionRequest request) {
+        sessionRepository.findByNameIgnoreCase(request.getName()).ifPresent(existing -> {
+            throw new DuplicateSessionException("A session named " + request.getName() + " already exists");
+        });
+
+        Session session = Session.builder()
+                .name(request.getName())
+                .capacity(request.getCapacity())
+                .build();
+
+        return SessionResponse.of(sessionRepository.save(session), 0);
     }
 
     @Transactional(readOnly = true)

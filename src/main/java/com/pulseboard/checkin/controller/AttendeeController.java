@@ -51,6 +51,12 @@ public class AttendeeController {
         return attendeeService.getAllSessions();
     }
 
+    @PostMapping("/sessions")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SessionResponse createSession(@Valid @RequestBody CreateSessionRequest request) {
+        return attendeeService.createSession(request);
+    }
+
     @GetMapping("/dashboard")
     public DashboardResponse getDashboard() {
         return attendeeService.getDashboard();
